@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#C7B299"
+tools:context="spic.nau_btl.TirarFotoActivity"
+android:orientation="vertical">
+
+<RelativeLayout
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_marginBottom="25dp"
+    android:layout_marginLeft="22dp"
+    android:layout_marginRight="22dp"
+    android:layout_marginTop="20dp">
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="157.5dp"
+        android:layout_height="49dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/nomeapp" />
+
+</RelativeLayout>
+
+
+
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="22dp"
+    android:paddingRight="22dp"
+    android:layout_marginTop="100dp"
+    android:layout_below="@+id/relativeLayout"
+    android:layout_alignParentStart="true">
+
+    <spic.nau_btl.AutoFitTextureView
+        android:id="@+id/texture"
+        android:layout_width="361.50dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal" />
+    <!--<FrameLayout-->
+        <!--android:id="@+id/container"-->
+        <!--android:layout_width="361.50dp"-->
+        <!--android:layout_height="408.00dp"-->
+        <!--android:background="#000" />-->
+
+
+    <ImageView
+        android:id="@+id/fotocamera"
+        android:layout_width="361.50dp"
+        android:layout_height="481.50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/diaporama" />
+
+
+</RelativeLayout>
+
+<Button
+    android:id="@+id/buttonTirarFoto"
+    android:layout_width="106.5dp"
+    android:layout_height="106.5dp"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="66dp"
+    android:layout_marginTop="22dp"
+    android:background="@drawable/tirar_foto" />
+
+
+<!--<ScrollView-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:id="@+id/scrollView"-->
+<!--android:layout_gravity="center_horizontal"-->
+<!--android:layout_marginTop="0dp"-->
+<!--android:layout_weight="1">-->
+
+<!--</ScrollView>-->
+
+
+</RelativeLayout>
