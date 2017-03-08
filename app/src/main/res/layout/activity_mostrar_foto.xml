@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#C7B299"
+    tools:context="spic.nau_btl.MostraFoto"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/buttonTirarNovaFoto"
+        android:layout_width="56.5dp"
+        android:layout_height="56.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="114dp"
+        android:background="@drawable/botao_tirar_nova" />
+
+    <RelativeLayout
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginTop="20dp">
+
+
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="157.5dp"
+            android:layout_height="49dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/nomeapp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/MostraTesto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="60.00dp"
+        android:paddingRight="60.00dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:id="@+id/imageViewImagem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="200dp"
+            app:srcCompat="@color/cardview_light_background" />
+
+        <RelativeLayout
+            android:id="@+id/Termos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="469dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+
+                android:layout_marginBottom="52dp"
+                android:text="AUTORIZO A UTILIZAÇÃO E TRATAMENTO DOS MEUS DADOS PESSOAIS PARA EFEITOS DE MARKETING E DIVULGAÇÃO DOS HOTÉIS DO GRUPO NAU HOTELS & RESORTS.  A NAU HOTELS NAO VENDERÁ NEM CEDERÁ OS SEUS DADOS PESSOAIS A TERCEIROS."
+                android:textSize="6dp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='android:text=" I AUTHORIZE THE USE AND TREATMENT OF MY PERSONAL DATA FOR THE PURPOSES OF MARKETING AND DISCLOSURE OF THE NAU HOTELS & RESORTS GROUP. NAU HOTELS WILL NOT SELL OR GIVE YOUR PERSONAL DATA TO THIRD PARTIES"'
+                android:textSize="6dp" />
+
+            <RelativeLayout
+                android:id="@+id/imagemPrew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

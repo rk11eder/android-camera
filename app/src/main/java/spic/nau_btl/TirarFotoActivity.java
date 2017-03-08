@@ -8,6 +8,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -69,7 +70,10 @@ import static java.lang.Math.abs;
 
 public class TirarFotoActivity extends AppCompatActivity {
 
-    private static String globalstringname;
+    public static String globalstringname;
+
+
+
     private static Bitmap topImage;
     private static Bitmap bitmap2;
 
@@ -457,6 +461,12 @@ public class TirarFotoActivity extends AppCompatActivity {
             public void onClick(View arg0) {
 
                 takePicture();
+
+
+
+
+
+
             }
         });
 
@@ -994,7 +1004,7 @@ public class TirarFotoActivity extends AppCompatActivity {
 //                matrix.postRotate(270);
 //            }
 //            else{
-                matrix.postRotate(90);
+                matrix.postRotate(0);
 //            }
 
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -1011,8 +1021,11 @@ public class TirarFotoActivity extends AppCompatActivity {
             Bitmap resized = Bitmap.createScaledBitmap(rotatedBitmap, width_bitmap, height_bitmap, true);
 
 
-            int delightful = abs(resized.getHeight()-height_origin_moldura_final);
-            Log.i("AQUI",delightful+"");
+            int delightful = (resized.getHeight()-height_origin_moldura_final);
+
+
+
+
             Bitmap croppedBmp = createBitmap(resized, 0, delightful, resized.getWidth(), resized.getHeight()-delightful);
 
 
@@ -1022,6 +1035,7 @@ public class TirarFotoActivity extends AppCompatActivity {
             byte[] square = bos.toByteArray();
 
             File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
+
 
 
             try {
@@ -1068,15 +1082,20 @@ public class TirarFotoActivity extends AppCompatActivity {
 // Create a media file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         globalstringname= "IMG_"+ timeStamp + ".jpg";
+
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE){
             mediaFile = new File(mediaStorageDir.getPath() + File.separator +
                     "IMG_"+ timeStamp + ".jpg");
+
+
         } else {
             return null;
         }
 
+
         return mediaFile;
+
     }
 
     /**
@@ -1163,13 +1182,21 @@ public class TirarFotoActivity extends AppCompatActivity {
      */
     private void showToast(final String text) {
         final Activity activity = TirarFotoActivity.this;
+
+
+
         if (activity != null) {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
+                    Log.e("NomeImagem", globalstringname + "sad");
+                    Intent nextActivity = new Intent(TirarFotoActivity.this, MostraFoto.class);
+                    nextActivity.putExtra("EXTRA_SESSION_ID", globalstringname.toString());
+                    startActivity(nextActivity);
                 }
             });
         }
+
     }
 }

@@ -48,6 +48,11 @@
             android:screenOrientation="portrait">
 
         </activity>
+
+        <activity android:name=".MostraFoto"
+            android:screenOrientation="portrait">
+        </activity>
+
     </application>
 
 </manifest>

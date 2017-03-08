@@ -8,7 +8,7 @@ tools:context="spic.nau_btl.TirarFotoActivity"
 android:orientation="vertical">
 
 <RelativeLayout
-    android:id="@+id/relativeLayout"
+    android:id="@+id/logo"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
@@ -40,7 +40,7 @@ android:orientation="vertical">
     android:paddingLeft="22dp"
     android:paddingRight="22dp"
     android:layout_marginTop="100dp"
-    android:layout_below="@+id/relativeLayout"
+    android:layout_below="@+id/logo"
     android:layout_alignParentStart="true">
 
     <spic.nau_btl.AutoFitTextureView
