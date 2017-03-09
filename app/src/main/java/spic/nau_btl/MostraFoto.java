@@ -2,10 +2,13 @@ package spic.nau_btl;
 
 
 
+        import android.content.Context;
         import android.content.Intent;
         import android.graphics.Bitmap;
         import android.graphics.BitmapFactory;
         import android.graphics.drawable.BitmapDrawable;
+        import android.net.ConnectivityManager;
+        import android.net.NetworkInfo;
         import android.net.Uri;
         import android.os.AsyncTask;
         import android.support.v7.app.AppCompatActivity;
@@ -80,6 +83,110 @@ public class MostraFoto extends AppCompatActivity {
 
 
     }
+
+    public void network(){
+
+            RetrieveFeedTask task = new RetrieveFeedTask();
+            task.execute();
+
+       
+    }
+    private boolean isNetworkAvailable() {
+
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+
+
+        return activeNetworkInfo != null;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
+
+        private Exception exception;
+
+        protected void onPreExecute() {
+            Log.e("dwq","asdcwa");
+
+        }
+
+        protected String doInBackground(Void... urls) {
+
+            // Do some validation here
+
+            try {
+                Log.e("dwq","asdcwa");
+                URL url = new URL("http://terracottasunset.com/fotografias/save_photo.php");
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setReadTimeout(10000);
+                urlConnection.setConnectTimeout(15000);
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setDoInput(true);
+                urlConnection.setDoOutput(true);
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] imageBytes = baos.toByteArray();
+                String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+                Uri.Builder builder = new Uri.Builder()
+                        .appendQueryParameter("image", encodedImage)
+                        .appendQueryParameter("imagename", globalstringname);
+                String query = builder.build().getEncodedQuery();
+
+
+                OutputStream os = urlConnection.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
+                writer.write(query);
+                writer.flush();
+                writer.close();
+                os.close();
+
+                try {
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                    StringBuilder stringBuilder = new StringBuilder();
+                    String line;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(line).append("\n");
+                    }
+                    bufferedReader.close();
+                    return stringBuilder.toString();
+                } finally {
+                    urlConnection.disconnect();
+                }
+            } catch (Exception e) {
+                Log.e("ERROR", e.getMessage(), e);
+                return null;
+            }
+        }
+
+        protected void onPostExecute(String response) {
+            if (response == null) {
+                response = "THERE WAS AN ERROR";
+
+                Toast.makeText(MostraFoto.this, "Ocurreu um erro ao enviar a foto", Toast.LENGTH_LONG).show();
+            } else {
+
+                Toast.makeText(MostraFoto.this, "A foto foi enviada com sucesso", Toast.LENGTH_LONG).show();
+
+
+            }
+            Log.i("INFO", response);
+        }
+
+
+    }
     public void mostrarImagem(){
         nomeFoto = getIntent().getStringExtra("EXTRA_SESSION_ID");
 
@@ -120,84 +227,8 @@ public class MostraFoto extends AppCompatActivity {
             @Override
 
             public void onClick(View v) {
+                network();
 
-
-
-
-                    class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
-
-                        private Exception exception;
-
-                        protected void onPreExecute() {
-
-                        }
-
-                        protected String doInBackground(Void... urls) {
-
-                            // Do some validation here
-
-                            try {
-                                URL url = new URL("http://terracottasunset.com/fotografias/save_photo.php");
-                                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                                urlConnection.setReadTimeout(10000);
-                                urlConnection.setConnectTimeout(15000);
-                                urlConnection.setRequestMethod("POST");
-                                urlConnection.setDoInput(true);
-                                urlConnection.setDoOutput(true);
-
-                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                                byte[] imageBytes = baos.toByteArray();
-                                String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-
-                                Uri.Builder builder = new Uri.Builder()
-                                        .appendQueryParameter("image", encodedImage)
-                                        .appendQueryParameter("imagename", globalstringname);
-                                String query = builder.build().getEncodedQuery();
-
-
-                                OutputStream os = urlConnection.getOutputStream();
-                                BufferedWriter writer = new BufferedWriter(
-                                        new OutputStreamWriter(os, "UTF-8"));
-                                writer.write(query);
-                                writer.flush();
-                                writer.close();
-                                os.close();
-
-                                try {
-                                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                                    StringBuilder stringBuilder = new StringBuilder();
-                                    String line;
-                                    while ((line = bufferedReader.readLine()) != null) {
-                                        stringBuilder.append(line).append("\n");
-                                    }
-                                    bufferedReader.close();
-                                    return stringBuilder.toString();
-                                } finally {
-                                    urlConnection.disconnect();
-                                }
-                            } catch (Exception e) {
-                                Log.e("ERROR", e.getMessage(), e);
-                                return null;
-                            }
-                        }
-
-                        protected void onPostExecute(String response) {
-                            if (response == null) {
-                                response = "THERE WAS AN ERROR";
-
-                                Toast.makeText(MostraFoto.this, "Ocurreu um erro ao enviar a foto", Toast.LENGTH_LONG).show();
-                            } else {
-
-                                Toast.makeText(MostraFoto.this, "A foto foi enviada com sucesso", Toast.LENGTH_LONG).show();
-
-
-                            }
-                            Log.i("INFO", response);
-                        }
-
-
-                    }
 
 
             }
