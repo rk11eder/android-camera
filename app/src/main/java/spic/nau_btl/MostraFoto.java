@@ -7,26 +7,48 @@ package spic.nau_btl;
         import android.graphics.BitmapFactory;
         import android.graphics.drawable.BitmapDrawable;
         import android.net.Uri;
+        import android.os.AsyncTask;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
+        import android.util.Base64;
         import android.util.Log;
         import android.util.SparseIntArray;
 
         import android.view.Surface;
         import android.view.View;
         import android.widget.Button;
+        import android.widget.EditText;
         import android.widget.ImageView;
+        import android.widget.RadioButton;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
+        import java.io.BufferedReader;
+        import java.io.BufferedWriter;
+        import java.io.ByteArrayOutputStream;
         import java.io.File;
+        import java.io.InputStreamReader;
+        import java.io.OutputStream;
+        import java.io.OutputStreamWriter;
+        import java.net.HttpURLConnection;
+        import java.net.URL;
+
+        import static spic.nau_btl.TirarFotoActivity.globalstringname;
 
 /**
  * Created by Eder Barbosa on 08/03/2017.
  */
 public class MostraFoto extends AppCompatActivity {
           private ImageView mImageView;
+          private RadioButton radioButtonTermos;
+          private   Bitmap bitmap;
 
+
+
+          private static Button guardarFoto;
           private static Button return_clik;
           private static String nomeFoto;
+          private static EditText email;
           private static final int request_code=0;
 
 
@@ -52,6 +74,7 @@ public class MostraFoto extends AppCompatActivity {
 
         voltarParaTras();
         mostrarImagem();
+        enviarEmail();
 
 
 
@@ -60,20 +83,11 @@ public class MostraFoto extends AppCompatActivity {
     public void mostrarImagem(){
         nomeFoto = getIntent().getStringExtra("EXTRA_SESSION_ID");
 
-
-
-
-// File  imagemGet= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-
-
-        File imageFile = new File("/sdcard/DCIM/SunsetTerracotta/"+nomeFoto);
+        File imageFile = new File("/sdcard/DCIM/NAU/"+nomeFoto);
         ImageView jpgView = (ImageView)findViewById(R.id.imageViewImagem);
 
-        Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
+         bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
         jpgView.setImageBitmap(bitmap);
-
-
-
 
 
 
@@ -93,6 +107,103 @@ public class MostraFoto extends AppCompatActivity {
 
             }
         });
+
+
+
+    }
+    public void enviarEmail(){
+        return_clik=(RadioButton)findViewById(R.id.radioButtonTermos);
+        guardarFoto =(Button)findViewById(R.id.guardarFoto);
+        email=(EditText)findViewById(R.id.editTextEmail);
+
+        guardarFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            public void onClick(View v) {
+
+
+
+
+                    class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
+
+                        private Exception exception;
+
+                        protected void onPreExecute() {
+
+                        }
+
+                        protected String doInBackground(Void... urls) {
+
+                            // Do some validation here
+
+                            try {
+                                URL url = new URL("http://terracottasunset.com/fotografias/save_photo.php");
+                                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                                urlConnection.setReadTimeout(10000);
+                                urlConnection.setConnectTimeout(15000);
+                                urlConnection.setRequestMethod("POST");
+                                urlConnection.setDoInput(true);
+                                urlConnection.setDoOutput(true);
+
+                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                byte[] imageBytes = baos.toByteArray();
+                                String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+                                Uri.Builder builder = new Uri.Builder()
+                                        .appendQueryParameter("image", encodedImage)
+                                        .appendQueryParameter("imagename", globalstringname);
+                                String query = builder.build().getEncodedQuery();
+
+
+                                OutputStream os = urlConnection.getOutputStream();
+                                BufferedWriter writer = new BufferedWriter(
+                                        new OutputStreamWriter(os, "UTF-8"));
+                                writer.write(query);
+                                writer.flush();
+                                writer.close();
+                                os.close();
+
+                                try {
+                                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                                    StringBuilder stringBuilder = new StringBuilder();
+                                    String line;
+                                    while ((line = bufferedReader.readLine()) != null) {
+                                        stringBuilder.append(line).append("\n");
+                                    }
+                                    bufferedReader.close();
+                                    return stringBuilder.toString();
+                                } finally {
+                                    urlConnection.disconnect();
+                                }
+                            } catch (Exception e) {
+                                Log.e("ERROR", e.getMessage(), e);
+                                return null;
+                            }
+                        }
+
+                        protected void onPostExecute(String response) {
+                            if (response == null) {
+                                response = "THERE WAS AN ERROR";
+
+                                Toast.makeText(MostraFoto.this, "Ocurreu um erro ao enviar a foto", Toast.LENGTH_LONG).show();
+                            } else {
+
+                                Toast.makeText(MostraFoto.this, "A foto foi enviada com sucesso", Toast.LENGTH_LONG).show();
+
+
+                            }
+                            Log.i("INFO", response);
+                        }
+
+
+                    }
+
+
+            }
+        });
+
+
 
 
 

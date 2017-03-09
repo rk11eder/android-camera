@@ -429,7 +429,7 @@ public class TirarFotoActivity extends AppCompatActivity {
         Drawable diaporama = getResources().getDrawable( R.drawable.diaporama_final );
 
         topImage = drawableToBitmap(diaporama);
-
+/*
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), "NAU");
 
@@ -454,7 +454,7 @@ public class TirarFotoActivity extends AppCompatActivity {
 
         mFile = new File(mediaStorageDir.getPath() + File.separator +
                 "IMG_"+ timeStamp + ".jpg");
-
+*/
         Button buttonTira= (Button)findViewById(R.id.buttonTirarFoto);
         buttonTira.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -915,7 +915,6 @@ public class TirarFotoActivity extends AppCompatActivity {
                                                @NonNull CaptureRequest request,
                                                @NonNull TotalCaptureResult result) {
                     showToast("Saved: " + mFile);
-                    Log.d(TAG, mFile.toString());
                     unlockFocus();
                 }
             };
@@ -1066,7 +1065,7 @@ public class TirarFotoActivity extends AppCompatActivity {
         Log.i("ESTADO MEMORIA",Environment.getExternalStorageState());
 
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DCIM), "SunsetTerracotta");
+                Environment.DIRECTORY_DCIM), "NAU");
 
 
         // This location works best if you want the created images to be shared
