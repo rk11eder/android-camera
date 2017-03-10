@@ -99,8 +99,9 @@ public class MostraFoto extends AppCompatActivity {
 
 
     }
-    private boolean isNetworkAvailable() {
+    /*
 
+    private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
@@ -108,11 +109,20 @@ public class MostraFoto extends AppCompatActivity {
 
         return activeNetworkInfo != null;
     }
+*/
 
-    public void network(){
 
-        RetrieveFeedTask task = new RetrieveFeedTask();
-        task.execute();
+    public void network( ){
+
+      // if (isNetworkAvailable()) {
+            RetrieveFeedTask task = new RetrieveFeedTask();
+            task.execute();
+        /*
+        } else {
+
+        }
+
+
 /*
         if (isNetworkAvailable()) {
 

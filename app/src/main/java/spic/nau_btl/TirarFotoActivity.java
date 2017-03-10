@@ -37,6 +37,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.renderscript.RSRuntimeException;
 import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentCompat;
 import android.support.v4.app.ActivityCompat;
@@ -1003,11 +1004,24 @@ public class TirarFotoActivity extends AppCompatActivity {
 //                matrix.postRotate(270);
 //            }
 //            else{
-                matrix.postRotate(0);
-//            }
+
+
 
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes , 0, bytes.length);
+            int widthbit = bitmap.getWidth();
+            int heightbit = bitmap.getHeight();
+
+            if (widthbit>heightbit) {
+
+                matrix.postRotate(90);
+            }else {
+                matrix.postRotate(0);
+            }
+//            }
+
+
+
 
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap,bitmap.getWidth(),bitmap.getHeight(),true);
 
