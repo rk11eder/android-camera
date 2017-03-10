@@ -6,6 +6,7 @@ package spic.nau_btl;
         import android.content.Intent;
         import android.graphics.Bitmap;
         import android.graphics.BitmapFactory;
+        import android.graphics.Typeface;
         import android.graphics.drawable.BitmapDrawable;
         import android.net.ConnectivityManager;
         import android.net.NetworkInfo;
@@ -13,6 +14,7 @@ package spic.nau_btl;
         import android.os.AsyncTask;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
+        import android.text.TextUtils;
         import android.util.Base64;
         import android.util.Log;
         import android.util.SparseIntArray;
@@ -23,6 +25,7 @@ package spic.nau_btl;
         import android.widget.EditText;
         import android.widget.ImageView;
         import android.widget.RadioButton;
+        import android.widget.RadioGroup;
         import android.widget.TextView;
         import android.widget.Toast;
 
@@ -45,13 +48,16 @@ public class MostraFoto extends AppCompatActivity {
           private ImageView mImageView;
           private RadioButton radioButtonTermos;
           private   Bitmap bitmap;
+          private static Button button_sbm;
+          private RadioGroup radioGroup;
+          private EditText editTextEmail;
 
 
 
           private static Button guardarFoto;
           private static Button return_clik;
           private static String nomeFoto;
-          private static EditText email;
+
           private static final int request_code=0;
 
 
@@ -75,6 +81,16 @@ public class MostraFoto extends AppCompatActivity {
 
         decorView.setSystemUiVisibility(uiOptions);
 
+        Typeface grupe=Typeface.createFromAsset(getAssets(),"fonts/MyriadPro-Regular.otf");
+        TextView termosTest=(TextView) findViewById(R.id.textViewTermos);
+        TextView termosTest2=(TextView) findViewById(R.id.textViewTermos2);
+        TextView termosConcordo=(TextView) findViewById(R.id.textViewConcordo);
+
+        termosTest.setTypeface(grupe);
+        termosTest2.setTypeface(grupe);
+
+        termosConcordo.setTypeface(grupe);
+
         voltarParaTras();
         mostrarImagem();
         enviarEmail();
@@ -82,14 +98,6 @@ public class MostraFoto extends AppCompatActivity {
 
 
 
-    }
-
-    public void network(){
-
-            RetrieveFeedTask task = new RetrieveFeedTask();
-            task.execute();
-
-       
     }
     private boolean isNetworkAvailable() {
 
@@ -100,6 +108,22 @@ public class MostraFoto extends AppCompatActivity {
 
         return activeNetworkInfo != null;
     }
+
+    public void network(){
+
+        RetrieveFeedTask task = new RetrieveFeedTask();
+        task.execute();
+/*
+        if (isNetworkAvailable()) {
+
+
+        } else {
+
+            Toast.makeText(MostraFoto.this, "Ligue o Wireless ou os dados móveis", Toast.LENGTH_LONG).show();
+        }
+        */
+    }
+
 
 
 
@@ -116,7 +140,7 @@ public class MostraFoto extends AppCompatActivity {
         private Exception exception;
 
         protected void onPreExecute() {
-            Log.e("dwq","asdcwa");
+
 
         }
 
@@ -172,6 +196,8 @@ public class MostraFoto extends AppCompatActivity {
         }
 
         protected void onPostExecute(String response) {
+
+
             if (response == null) {
                 response = "THERE WAS AN ERROR";
 
@@ -209,6 +235,7 @@ public class MostraFoto extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent nextActivity = new Intent(MostraFoto.this, TirarFotoActivity.class);
+                nextActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(nextActivity);
 
 
@@ -219,15 +246,34 @@ public class MostraFoto extends AppCompatActivity {
 
     }
     public void enviarEmail(){
-        return_clik=(RadioButton)findViewById(R.id.radioButtonTermos);
+
         guardarFoto =(Button)findViewById(R.id.guardarFoto);
-        email=(EditText)findViewById(R.id.editTextEmail);
+        editTextEmail=(EditText)findViewById(R.id.editTextEmail);
+
+
 
         guardarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
 
             public void onClick(View v) {
-                network();
+
+                 radioGroup = (RadioGroup) findViewById(R.id.RadioGroup);
+                int radioSelect = radioGroup.getCheckedRadioButtonId();
+                String emailEnviar = editTextEmail.getText().toString();
+
+
+                if(radioSelect!=-1 && !TextUtils.isEmpty(emailEnviar)) {
+                    network();
+
+                }else if(radioSelect==-1){
+                    Toast.makeText(MostraFoto.this, "Aceite os termos acima referidos", Toast.LENGTH_LONG).show();
+
+                }else if(TextUtils.isEmpty(emailEnviar)){
+                    Toast.makeText(MostraFoto.this, "Prencha o campo do email", Toast.LENGTH_LONG).show();
+
+                }
+
+
 
 
 

@@ -914,7 +914,7 @@ public class TirarFotoActivity extends AppCompatActivity {
                 public void onCaptureCompleted(@NonNull CameraCaptureSession session,
                                                @NonNull CaptureRequest request,
                                                @NonNull TotalCaptureResult result) {
-                    showToast("Saved: " + mFile);
+                    showToast("Saved:/sdcard/DCIM/NAU/"+globalstringname );
                     unlockFocus();
                 }
             };
@@ -1192,6 +1192,7 @@ public class TirarFotoActivity extends AppCompatActivity {
                     Log.e("NomeImagem", globalstringname + "sad");
                     Intent nextActivity = new Intent(TirarFotoActivity.this, MostraFoto.class);
                     nextActivity.putExtra("EXTRA_SESSION_ID", globalstringname.toString());
+                    nextActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(nextActivity);
                 }
             });
