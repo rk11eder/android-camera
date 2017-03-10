@@ -13,12 +13,12 @@
 
 
     <RelativeLayout
-        android:id="@+id/relativeLayout"
+        android:id="@+id/Enviar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/Termos"
-        android:layout_alignParentStart="true">
+        android:layout_marginTop="12dp">
 
         <Button
             android:id="@+id/guardarFoto"
