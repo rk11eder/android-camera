@@ -193,6 +193,7 @@ public class MostraFoto extends AppCompatActivity {
 
         if(radioSelect!=-1 && !TextUtils.isEmpty(emailEnviar)) {
             loading.setVisibility(View.VISIBLE);
+            email = emailEnviar;
             network();
 
         }else if(radioSelect==-1){
@@ -269,10 +270,10 @@ public class MostraFoto extends AppCompatActivity {
 
             try {
                 Log.e("dwq","asdcwa");
-                URL url = new URL("http://terracottasunset.com/fotografias/save_photo.php");
+                URL url = new URL("http://spic.pt/NAU/fotos/save_photo.php");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setReadTimeout(10000);
-                urlConnection.setConnectTimeout(15000);
+                urlConnection.setReadTimeout(50000);
+                urlConnection.setConnectTimeout(50000);
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setDoInput(true);
                 urlConnection.setDoOutput(true);
@@ -283,7 +284,6 @@ public class MostraFoto extends AppCompatActivity {
                 String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
                 Uri.Builder builder = new Uri.Builder()
-
                         .appendQueryParameter("email", email)
                         .appendQueryParameter("image", encodedImage)
                         .appendQueryParameter("imagename", globalstringname);
@@ -312,6 +312,7 @@ public class MostraFoto extends AppCompatActivity {
                 }
             } catch (Exception e) {
                 Log.e("ERROR", e.getMessage(), e);
+
                 return null;
             }
         }
@@ -331,6 +332,7 @@ public class MostraFoto extends AppCompatActivity {
 
             }
             Log.i("INFO", response);
+            loading.setVisibility(View.GONE);
         }
 
 
