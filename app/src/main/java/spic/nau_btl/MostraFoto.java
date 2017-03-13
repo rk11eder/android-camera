@@ -48,6 +48,7 @@ public class MostraFoto extends AppCompatActivity {
           private static Button button_sbm;
           private RadioGroup radioGroup;
           private EditText editTextEmail;
+          private String email;
 
 
 
@@ -107,6 +108,7 @@ public class MostraFoto extends AppCompatActivity {
 
         guardarFoto =(Button)findViewById(R.id.guardarFoto);
         editTextEmail=(EditText)findViewById(R.id.editTextEmail);
+        email=editTextEmail.getText().toString();
 
 
 
@@ -281,6 +283,8 @@ public class MostraFoto extends AppCompatActivity {
                 String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
                 Uri.Builder builder = new Uri.Builder()
+
+                        .appendQueryParameter("email", email)
                         .appendQueryParameter("image", encodedImage)
                         .appendQueryParameter("imagename", globalstringname);
                 String query = builder.build().getEncodedQuery();
