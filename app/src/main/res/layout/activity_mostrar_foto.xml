@@ -46,6 +46,18 @@
         android:layout_alignParentStart="true">
 
 
+        <Button
+            android:id="@+id/buttonTirarNovaFoto"
+            android:layout_width="40.5dp"
+            android:layout_height="40.5dp"
+
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="0dp"
+            android:background="@drawable/tirar_nova" />
+
         <ImageView
             android:id="@+id/imageViewImagem"
             android:layout_width="361.50dp"
@@ -159,23 +171,28 @@
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/guardarFoto"
             android:backgroundTint="?attr/actionMenuTextColor"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:textColor="@android:color/black"
             android:textColorLink="@android:color/background_light" />
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/buttonTirarNovaFoto"
-        android:layout_width="40.5dp"
-        android:layout_height="40.5dp"
+    <RelativeLayout
+        android:id="@+id/loading_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.5"
+        android:background="#666666"
+        android:visibility="gone">
 
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/tirar_nova"
-        android:layout_marginBottom="226dp"
-        android:layout_above="@+id/Termos"
-        android:layout_alignEnd="@+id/logo"
-        android:layout_marginEnd="17dp" />
+        <ProgressBar
+            android:id="@+id/loading"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
 
 
 </RelativeLayout>

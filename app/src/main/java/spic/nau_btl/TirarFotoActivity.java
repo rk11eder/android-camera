@@ -37,7 +37,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.renderscript.RSRuntimeException;
 import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentCompat;
 import android.support.v4.app.ActivityCompat;
@@ -49,6 +48,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -67,14 +67,13 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 import static android.graphics.Bitmap.createBitmap;
-import static java.lang.Math.abs;
 
 public class TirarFotoActivity extends AppCompatActivity {
 
     public static String globalstringname;
 
-
-
+    private Button buttonTira;
+    private RelativeLayout loading;
     private static Bitmap topImage;
     private static Bitmap bitmap2;
 
@@ -426,6 +425,7 @@ public class TirarFotoActivity extends AppCompatActivity {
 
         decorView.setSystemUiVisibility(uiOptions);
 
+        loading = (RelativeLayout) findViewById(R.id.loading_holder);
 
         Drawable diaporama = getResources().getDrawable( R.drawable.diaporama_final );
 
@@ -456,11 +456,13 @@ public class TirarFotoActivity extends AppCompatActivity {
         mFile = new File(mediaStorageDir.getPath() + File.separator +
                 "IMG_"+ timeStamp + ".jpg");
 */
-        Button buttonTira= (Button)findViewById(R.id.buttonTirarFoto);
+        buttonTira= (Button)findViewById(R.id.buttonTirarFoto);
         buttonTira.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0) {
 
+                loading.setVisibility(View.VISIBLE);
+                buttonTira.setVisibility(View.GONE);
                 takePicture();
 
 
@@ -545,6 +547,9 @@ public class TirarFotoActivity extends AppCompatActivity {
         } else {
             mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
         }
+
+        loading.setVisibility(View.GONE);
+        buttonTira.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -1206,8 +1211,8 @@ public class TirarFotoActivity extends AppCompatActivity {
                     Log.e("NomeImagem", globalstringname + "sad");
                     Intent nextActivity = new Intent(TirarFotoActivity.this, MostraFoto.class);
                     nextActivity.putExtra("EXTRA_SESSION_ID", globalstringname.toString());
-                    nextActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(nextActivity);
+
                 }
             });
         }
