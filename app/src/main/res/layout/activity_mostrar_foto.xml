@@ -13,88 +13,14 @@
 
 
     <RelativeLayout
-        android:id="@+id/Enviar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/Termos"
-        android:layout_marginTop="0dp">
-
-        <Button
-            android:id="@+id/guardarFoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="170dp"
-            android:layout_weight="1"
-            android:background="@drawable/enviar_email"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/textViewConcordo" />
-
-        <ImageView
-            android:id="@+id/imageViewEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignStart="@+id/RadioGroup"
-            android:layout_centerVertical="true"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/view_email" />
-
-        <EditText
-            android:id="@+id/editTextEmail"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="?attr/actionMenuTextColor"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textColor="@android:color/black"
-            android:textColorLink="@android:color/background_light"
-            android:layout_centerVertical="true"
-            android:layout_alignEnd="@+id/imageViewEmail"
-            android:layout_marginEnd="53dp" />
-
-        <RadioGroup
-            android:id="@+id/RadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="50dp">
-
-            <RadioButton
-                android:id="@+id/radioButtonTermos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/RadioGroup"
-                android:layout_marginTop="16dp"
-                android:layout_toEndOf="@+id/RadioGroup"
-                android:layout_weight="1"
-                android:scrollbarAlwaysDrawHorizontalTrack="true" />
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/textViewConcordo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/RadioGroup"
-            android:layout_toEndOf="@+id/RadioGroup"
-            android:paddingBottom="8sp"
-            android:text="EU CONCORDO/    I AGREE"
-            android:textColor="@android:color/black"
-            android:textSize="12dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="25dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="22dp"
         android:layout_marginRight="22dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="44dp">
 
 
         <ImageView
@@ -122,56 +48,134 @@
 
         <ImageView
             android:id="@+id/imageViewImagem"
-            android:layout_width="match_parent"
-            android:layout_height="600dp"
-            android:layout_alignParentStart="true"
+            android:layout_width="361.50dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@android:color/white"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="38dp"
-            app:srcCompat="@android:color/white" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="21dp" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/Termos"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="180dp"
         android:paddingRight="50dp"
         android:paddingStart="50dp"
-        android:layout_marginTop="12dp"
         android:layout_below="@+id/MostraImagem"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp">
 
-        <Button
-            android:id="@+id/buttonTirarNovaFoto"
-            android:layout_width="40.5dp"
-            android:layout_height="40.5dp"
+        <TextView
+            android:id="@+id/textViewConcordo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingBottom="8sp"
+            android:text="EU CONCORDO/    I AGREE"
+            android:textColor="@android:color/black"
+            android:textSize="12dp"
+            android:layout_alignBottom="@+id/RadioGroup"
+            android:layout_toEndOf="@+id/RadioGroup" />
 
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/tirar_nova" />
+        <RadioGroup
+            android:id="@+id/RadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textViewTermos2"
+            android:layout_marginTop="18dp">
+
+            <RadioButton
+                android:id="@+id/radioButtonTermos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/RadioGroup"
+                android:layout_toEndOf="@+id/RadioGroup"
+                android:layout_weight="1"
+                android:scrollbarAlwaysDrawHorizontalTrack="true" />
+        </RadioGroup>
 
         <TextView
             android:id="@+id/textViewTermos2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textViewTermos"
+            android:layout_marginTop="15dp"
             android:text="I AUTHORIZE THE USE AND TREATMENT OF MY PERSONAL DATA FOR THE PURPOSES OF MARKETING AND DISCLOSURE OF THE NAU HOTELS AND RESORTS GROUP. NAU HOTELS WILL NOT SELL OR GIVE YOUR PERSONAL DATA TO THIRD PARTIES."
             android:textColor="@android:color/black"
-            android:textSize="12dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true" />
+            android:textSize="12dp" />
 
         <TextView
             android:id="@+id/textViewTermos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="65dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="23dp"
             android:text="AUTORIZO A UTILIZAÇÃO E TRATAMENTO DOS MEUS DADOS PESSOAIS PARA EFEITOS DE MARKETING E DIVULGAÇÃO DOS HOTÉIS DO GRUPO NAU HOTELS E RESORTS.  A NAU HOTELS NAO VENDERÁ NEM CEDERÁ OS SEUS DADOS PESSOAIS A TERCEIROS. "
             android:textColor="@android:color/black"
-            android:textSize="12sp"
-            android:layout_below="@+id/buttonTirarNovaFoto"
-            android:layout_alignParentStart="true" />
+            android:textSize="12sp" />
+
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/Enviar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Termos"
+        android:layout_marginTop="5dp">
+
+        <Button
+            android:id="@+id/guardarFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/imageViewEmail"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="-0dp"
+            android:layout_weight="1"
+            android:background="@drawable/enviar_email" />
+
+        <ImageView
+            android:id="@+id/imageViewEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/view_email" />
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/guardarFoto"
+            android:backgroundTint="?attr/actionMenuTextColor"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/black"
+            android:textColorLink="@android:color/background_light" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/buttonTirarNovaFoto"
+        android:layout_width="40.5dp"
+        android:layout_height="40.5dp"
+
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/tirar_nova"
+        android:layout_marginBottom="226dp"
+        android:layout_above="@+id/Termos"
+        android:layout_alignEnd="@+id/logo"
+        android:layout_marginEnd="17dp" />
 
 
 </RelativeLayout>

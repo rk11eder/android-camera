@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         decorView.setSystemUiVisibility(uiOptions);
 
+
+
         boolean hasPermission = (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
         if (!hasPermission) {

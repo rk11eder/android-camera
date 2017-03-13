@@ -21,6 +21,7 @@ package spic.nau_btl;
 
         import android.view.Surface;
         import android.view.View;
+        import android.view.inputmethod.InputMethodManager;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.ImageView;
@@ -262,10 +263,20 @@ public class MostraFoto extends AppCompatActivity {
 
 
 
+
+
         guardarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
 
             public void onClick(View v) {
+
+                InputMethodManager imm = (InputMethodManager)getSystemService(
+                        Context.INPUT_METHOD_SERVICE
+
+                );
+                imm.hideSoftInputFromWindow(editTextEmail.getWindowToken(), 0);
+
+
 
                  radioGroup = (RadioGroup) findViewById(R.id.RadioGroup);
                 int radioSelect = radioGroup.getCheckedRadioButtonId();

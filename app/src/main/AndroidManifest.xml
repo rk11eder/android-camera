@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="spic.nau_btl">
 
+
+
+
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature

@@ -7,27 +7,27 @@ android:background="#C7B299"
 tools:context="spic.nau_btl.TirarFotoActivity"
 android:orientation="vertical">
 
-<RelativeLayout
-    android:id="@+id/logo"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_marginBottom="25dp"
-    android:layout_marginLeft="22dp"
-    android:layout_marginRight="22dp"
-    android:layout_marginTop="20dp">
+    <RelativeLayout
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginTop="44dp">
 
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="157.5dp"
-        android:layout_height="49dp"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/nomeapp" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="157.5dp"
+            android:layout_height="49dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/nomeapp" />
 
-</RelativeLayout>
+    </RelativeLayout>
 
 
 
